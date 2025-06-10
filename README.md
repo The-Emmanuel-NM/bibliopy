@@ -1,6 +1,6 @@
 # 📚 BiblioPy – Projet de gestion de bibliothèque en ligne de commande
 
-Projet réalisé par le **Groupe 4** dans le cadre du cours d'Algorithmique II.
+Projet réalisé par le **Groupe 56** dans le cadre du cours d'Algorithmique II.
 
 ---
 
