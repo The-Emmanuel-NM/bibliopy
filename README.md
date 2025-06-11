@@ -47,6 +47,7 @@ Dans PowerShell ou Terminal :
 
 ```bash
 python main.py
+```
 
 ## Menu principal
 --- MENU ---
