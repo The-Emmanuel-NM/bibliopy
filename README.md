@@ -68,7 +68,7 @@ python main.py
 -Un fichier .txt est généré automatiquement via le menu pour afficher la liste des emprunts en cours.
 
 
-##Membres du Groupe 56
+# Membres du Groupe 56
 [NGOY MELOA Emmanuel]
 
 [NGOY BULUNGI Riben]
