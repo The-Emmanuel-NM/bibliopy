@@ -11,7 +11,6 @@ Créer un système simple de gestion de bibliothèque en Python, via une interfa
 - Emprunter et retourner des livres
 - Rechercher des livres par mot-clé
 - Voir les emprunts des utilisateurs
-- Générer un rapport d’emprunts (.txt)
 - Sauvegarder automatiquement les données (JSON)
 
 ---
