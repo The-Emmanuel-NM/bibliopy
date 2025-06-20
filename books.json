@@ -1,0 +1,54 @@
+[
+    {
+        "id": 1,
+        "titre": "1984",
+        "auteur": "George Orwell",
+        "isbn": "9780451524935",
+        "annee": 1949,
+        "emprunt": false
+    },
+    {
+        "id": 5,
+        "titre": "Clean Code",
+        "auteur": "Robert C. Martin",
+        "isbn": "9780132350884",
+        "annee": 2008,
+        "emprunt": false
+    },
+    {
+        "id": 2,
+        "titre": "Le Petit Prince",
+        "auteur": "Antoine de Saint-Exupéry",
+        "isbn": "9780156013987",
+        "annee": 1943,
+        "emprunt": true,
+        "emprunteur": "Alice",
+        "date_emprunt": "2025-06-10"
+    },
+    {
+        "id": 4,
+        "titre": "L’Étranger",
+        "auteur": "Albert Camus",
+        "isbn": "9782070360024",
+        "annee": 1942,
+        "emprunt": true,
+        "emprunteur": "Victor",
+        "date_emprunt": "2025-06-17"
+    },
+    {
+        "id": 3,
+        "titre": "Python pour les nuls",
+        "auteur": "John Paul Mueller",
+        "isbn": "9782412046881",
+        "annee": 2020,
+        "emprunt": false
+    },
+    {
+        "id": 6,
+        "titre": "boss",
+        "auteur": "inconnu",
+        "isbn": "9708577023620",
+        "annee": 2023,
+        "emprunt": false
+    }
+]
