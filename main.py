@@ -1,52 +1,107 @@
-from gestion_donnees.gestion_livres import afficher_livre, ajouter_livre
-from emprunts.gestion_emprunts import emprunter_livre, afficher_emprunts
-from emprunts.retour_emprunts import retourner_livre
-from emprunts.gestion_emprunts import charger_emprunts
-from emprunts.rapport_emprunts import generer_rapport_txt
-from recherche.recherche_livres import rechercher_livre
+# === main.py ===
+import data_manager
+import cli_interface
+import loan_manager
+import search_engine
+import sort_engine
 
-# gestion_donnees/gestion_livres.py
-# main.py   
 def main():
-    charger_emprunts()
+    books = data_manager.load_books()
+
     while True:
-        print("\n--- MENU ---")
-        print("1. Afficher le livre")
-        print("2. Ajouter un livre")
-        print("3. Emprunter un livre")
-        print("4. Voir les emprunts")
-        print("5. Retourner un livre")
-        print("6. Rechercher un livre")
-        print("7. générer un rapport des emprunts")
-        print("8. Quitter")
+        cli_interface.afficher_menu()  # <-- Ajoute cette ligne
+        choix = cli_interface.demander_entree(" Votre choix : ", int)
 
-        choix = input("Choisis une option : ")
+        if choix == 1:
+            titre = input("Titre : ")
+            auteur = input("Auteur : ")
+            isbn = input("ISBN : ")
+            annee = cli_interface.demander_entree("Année : ", int)
+            new_id = data_manager.generate_new_id(books)
+            nouveau_livre = {
+                "id": new_id,
+                "titre": titre,
+                "auteur": auteur,
+                "isbn": isbn,
+                "annee": annee,
+                "emprunt": False
+            }
+            data_manager.add_book(books, nouveau_livre)
+            print("Livre ajouté avec succès.")
 
-        if choix == "1":
-            afficher_livres()
-        elif choix == "2":
-            titre = input("Titre du livre à ajouter : ")
-            ajouter_livre(titre)
-        elif choix == "3":
-            utilisateur = input("Nom de l'utilisateur : ")
-            titre = input("Titre du livre à emprunter : ")
-            emprunter_livre(utilisateur, titre)
-        elif choix == "4":
-            afficher_emprunts()
-        elif choix == "5":
-            utilisateur = input("Nom de l'utilisateur : ")
-            titre = input("Titre du livre à retourner : ")
-            retourner_livre(utilisateur, titre)
-        elif choix == "6":
-            mot_cle = input("Entrez un mot clé pour la recherche : ")
-            rechercher_livre(mot_cle)
-        elif choix == "7":
-            generer_rapport_txt()
-        elif choix == "8":
-            print("👋 Merci d'avoir utilisé le système de gestion de livres !")
+        elif choix == 2:
+            book_id = cli_interface.demander_entree("ID du livre à supprimer : ", int)
+            data_manager.delete_book(books, book_id)
+            print("Livre supprimé.")
+
+        elif choix == 3:
+            book_id = cli_interface.demander_entree("ID du livre à modifier : ", int)
+            for book in books:
+                if book["id"] == book_id:
+                    titre = input(f"Titre [{book['titre']}] : ") or book["titre"]
+                    auteur = input(f"Auteur [{book['auteur']}] : ") or book["auteur"]
+                    isbn = input(f"ISBN [{book['isbn']}] : ") or book["isbn"]
+                    annee = input(f"Année [{book['annee']}] : ") or book["annee"]
+                    updated = {
+                        "titre": titre,
+                        "auteur": auteur,
+                        "isbn": isbn,
+                        "annee": int(annee)
+                    }
+                    data_manager.update_book(books, book_id, updated)
+                    print("Livre modifié.")
+                    break
+            else:
+                print("Livre non trouvé.")
+
+        elif choix == 4:
+            print("Rechercher par : 1. Titre  2. Auteur  3. ISBN")
+            champ = cli_interface.demander_entree("Votre choix : ", int)
+            cles = {1: "titre", 2: "auteur", 3: "isbn"}
+            if champ in cles:
+                mot = input("Mot-clé : ")
+                resultat = search_engine.linear_search(books, mot, cles[champ])
+                cli_interface.afficher_livres(resultat)
+            else:
+                print("Choix invalide.")
+
+        elif choix == 5:
+            print("Trier par : 1. Titre  2. Auteur  3. Année")
+            champ = cli_interface.demander_entree("Votre choix : ", int)
+            cles = {1: "titre", 2: "auteur", 3: "annee"}
+            if champ in cles:
+                sort_engine.insertion_sort(books, cles[champ])
+                cli_interface.afficher_livres(books)
+            else:
+                print("Choix invalide.")
+
+        elif choix == 6:
+            book_id = cli_interface.demander_entree("ID du livre à emprunter : ", int)
+            nom = input("Nom de l’emprunteur : ")
+            if loan_manager.borrow_book(books, book_id, nom):
+                print("Livre emprunté.")
+            else:
+                print("Impossible d’emprunter ce livre.")
+
+        elif choix == 7:
+            book_id = cli_interface.demander_entree("ID du livre à retourner : ", int)
+            if loan_manager.return_book(books, book_id):
+                print("Livre retourné.")
+            else:
+                print("Ce livre n'était pas emprunté.")
+
+        elif choix == 8:
+            afficher_rapport(books)
+
+        elif choix == 9:
+            cli_interface.afficher_livres_en_retard(books)
+
+        elif choix == 10:
+            print("À bientôt !")
             break
+        
         else:
-            print("❌ Option invalide. Réessaie.")
+            print("Choix invalide.")
 
 if __name__ == "__main__":
     main()
