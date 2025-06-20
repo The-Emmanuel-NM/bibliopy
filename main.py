@@ -1,10 +1,11 @@
-# === main.py ===
+# fichier  main.py
+#importation des differents modules
 import data_manager
 import cli_interface
 import loan_manager
 import search_engine
 import sort_engine
-
+#definition de la fonction main 
 def main():
     books = data_manager.load_books()
 
