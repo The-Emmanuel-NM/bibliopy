@@ -1,10 +1,10 @@
-# 📚 BiblioPy – Projet de gestion de bibliothèque en ligne de commande
+# BiblioPy – Projet de gestion de bibliothèque en ligne de commande
 
 Projet réalisé par le **Groupe 56** dans le cadre du cours d'Algorithmique II.
 
 ---
 
-## 🧠 Objectif
+##  Objectif
 
 Créer un système simple de gestion de bibliothèque en Python, via une interface en ligne de commande, permettant de :
 - Gérer une collection de livres
@@ -16,7 +16,7 @@ Créer un système simple de gestion de bibliothèque en Python, via une interfa
 
 ---
 
-## 🏗️ Structure du projet
+## Structure du projet
 
 bibliopy-groupe/
 
