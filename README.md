@@ -19,6 +19,7 @@ Créer un système simple de gestion de bibliothèque en Python, via une interfa
 ## 🏗️ Structure du projet
 
 bibliopy-groupe/
+
 │
 ├── gestion_donnees/
 │ └── gestion_livres.py
